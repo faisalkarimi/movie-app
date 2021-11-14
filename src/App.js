@@ -1,7 +1,8 @@
 import "./App.css";
+import Home from "./screens/Home";
 
 function App() {
-  return <h1>Movie App</h1>;
+  return <Home />;
 }
 
 export default App;
