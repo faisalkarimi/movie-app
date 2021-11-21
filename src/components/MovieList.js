@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import Movie from "./Movie";
 import Header from "./Header";
-
-const API_URL =
-  "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=3fd2be6f0c70a2a598f084ddfb75487c&page=1";
-const IMG_PATH = "https://image.tmdb.org/t/p/w1280";
-const SEARCH_API =
-  "https://api.themoviedb.org/3/search/movie?api_key=3fd2be6f0c70a2a598f084ddfb75487c&query=";
+import { PaginationContext } from "../context/paginationContext";
 
 const MovieList = () => {
+  const { state } = useContext(PaginationContext);
+
+  const API_URL = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=3fd2be6f0c70a2a598f084ddfb75487c&page=${state.currentPage}`;
+  const IMG_PATH = "https://image.tmdb.org/t/p/w1280";
+  const SEARCH_API =
+    "https://api.themoviedb.org/3/search/movie?api_key=3fd2be6f0c70a2a598f084ddfb75487c&query=";
+
   const [movies, setMovies] = useState([]);
 
   const fetchMovie = async (url) => {
@@ -32,7 +34,7 @@ const MovieList = () => {
 
   useEffect(() => {
     fetchMovie(API_URL);
-  }, []);
+  }, [API_URL]);
 
   return (
     <>
