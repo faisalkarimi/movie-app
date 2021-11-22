@@ -3,6 +3,7 @@ import paginationReducer from "./paginationReducer";
 
 const initialState = {
   currentPage: 1,
+  currentPageIndex: 0,
 };
 export const PaginationContext = createContext(initialState);
 

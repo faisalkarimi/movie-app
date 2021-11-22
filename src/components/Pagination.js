@@ -1,38 +1,25 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import "./styles/pagination.css";
 import { PaginationContext } from "../context/paginationContext";
 
 const Pagination = () => {
   const { state, dispatch } = useContext(PaginationContext);
-  const [isActive, setIsActive] = useState(false);
-  const [targetId, setTargetId] = useState(null);
 
   const pageButtons = [1, 2, 3, 4, 5];
   const handlePrevBtn = () => {
-    dispatch({ type: "SET_CURRENT_PAGE", payload: state.currentPage - 5 });
-    console.log(state.currentPage);
+    dispatch({ type: "DECREMENT_BY_FIVE" });
   };
   const handleNextBtn = () => {
-    dispatch({ type: "SET_CURRENT_PAGE", payload: state.currentPage + 5 });
-    console.log(state.currentPage);
-  };
-
-  const handleActive = (e) => {
-    setTargetId(e.target.id);
-    console.log(e.target.id);
-    setIsActive(!isActive);
+    dispatch({ type: "INCREMENT_BY_FIVE" });
   };
 
   return (
     <div id="pagination">
       <nav>
         <div style={{ textAlign: "center", clear: "both" }}>
-          <ul className="pagination" onClick={handleActive}>
+          <ul className="pagination">
             {state.currentPage > 5 && (
-              <li
-                id="prev"
-                className={targetId === "prev" && isActive && "active"}
-              >
+              <li id="prev">
                 <button className="btn left" onClick={handlePrevBtn}>
                   Prev
                 </button>
@@ -44,21 +31,17 @@ const Pagination = () => {
                 onClick={() => {
                   dispatch({
                     type: "SET_CURRENT_PAGE",
-                    payload: state.currentPage + page,
+                    payload: state.currentPageIndex + page,
                   });
                   console.log(state.currentPage);
                 }}
                 title={`Page` + page}
-                className={targetId === page && isActive && "active"}
               >
-                {page}
+                {state.currentPageIndex + page}
               </li>
             ))}
             {state.currentPage < 500 && (
-              <li
-                id="next"
-                className={targetId === "next" && isActive && "active"}
-              >
+              <li id="next">
                 <button className="btn right" onClick={handleNextBtn}>
                   Next
                 </button>
