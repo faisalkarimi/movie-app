@@ -18,7 +18,7 @@ const Pagination = () => {
       <nav>
         <div style={{ textAlign: "center", clear: "both" }}>
           <ul className="pagination">
-            {state.currentPage > 5 && (
+            {state.currentPage >= 5 && (
               <li id="prev">
                 <button className="btn left" onClick={handlePrevBtn}>
                   Prev
@@ -33,9 +33,8 @@ const Pagination = () => {
                     type: "SET_CURRENT_PAGE",
                     payload: state.currentPageIndex + page,
                   });
-                  console.log(state.currentPage);
                 }}
-                title={`Page` + page}
+                title={`Page` + state.currentPageIndex + page}
               >
                 {state.currentPageIndex + page}
               </li>

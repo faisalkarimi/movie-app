@@ -8,14 +8,14 @@ const paginationReducer = (state, action) => {
     case "INCREMENT_BY_FIVE":
       return {
         ...state,
-        currentPage: state.currentPage + 5,
-        currentPageIndex: state.currentPage + 5,
+        currentPage: state.currentPageIndex + 5,
+        currentPageIndex: state.currentPage,
       };
     case "DECREMENT_BY_FIVE":
       return {
         ...state,
-        currentPage: state.currentPage - 5,
-        currentPageIndex: state.currentPage - 5,
+        currentPage: state.currentPageIndex - 5,
+        currentPageIndex: state.currentPage,
       };
     default:
       return state;
