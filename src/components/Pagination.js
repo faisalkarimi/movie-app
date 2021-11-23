@@ -5,6 +5,13 @@ import { PaginationContext } from "../context/paginationContext";
 const Pagination = () => {
   const { state, dispatch } = useContext(PaginationContext);
 
+  const handleActiveBtn = (e) => {
+    e.target.parentNode.childNodes.forEach((item) => {
+      item.classList.remove("active");
+    });
+    e.target.classList.add("active");
+  };
+
   const pageButtons = [1, 2, 3, 4, 5];
   const handlePrevBtn = () => {
     dispatch({ type: "DECREMENT_BY_FIVE" });
@@ -17,12 +24,10 @@ const Pagination = () => {
     <div id="pagination">
       <nav>
         <div style={{ textAlign: "center", clear: "both" }}>
-          <ul className="pagination">
+          <ul className="pagination" onClick={handleActiveBtn}>
             {state.currentPage >= 5 && (
-              <li id="prev">
-                <button className="btn left" onClick={handlePrevBtn}>
-                  Prev
-                </button>
+              <li id="prev" className="btn left" onClick={handlePrevBtn}>
+                Prev
               </li>
             )}
             {pageButtons.map((page) => (
@@ -40,10 +45,8 @@ const Pagination = () => {
               </li>
             ))}
             {state.currentPage < 500 && (
-              <li id="next">
-                <button className="btn right" onClick={handleNextBtn}>
-                  Next
-                </button>
+              <li id="next" className="btn right" onClick={handleNextBtn}>
+                Next
               </li>
             )}
           </ul>

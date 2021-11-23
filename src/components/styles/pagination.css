@@ -35,3 +35,7 @@
     background-color: #eee;
     color: #000;
 }
+.active {
+    background-color: #fff;
+    color: #000;
+}
